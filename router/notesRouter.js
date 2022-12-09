@@ -1,4 +1,5 @@
 const notesRouter = require('express').Router()
+const mongoose = require('mongoose')
 const Note = require('../models/Note')
 
 // let noteObject = [
@@ -33,6 +34,23 @@ notesRouter.get('/', (request, response) => {
     })
 })
 
+notesRouter.delete('/:id', (request, response) => {
+  const deleteId = request.params.id
+
+  Note
+    .findOneAndRemove({_id: deleteId})
+    .then(() => {
+      console.log('Deleted successfully')
+      response.end()
+    })
+    .catch(error => {
+      console.log(error)
+      console.log('Error deleting!')
+      response.status(404).end()
+    })
+
+})
+
 notesRouter.post('/', (request, response) => {
   const { title, content, pinned } = request.body
 
@@ -47,7 +65,6 @@ notesRouter.post('/', (request, response) => {
   note
     .save()
     .then(returnedNote => {
-      console.log(returnedNote)
       response.status(201).json(returnedNote)
     })
     .catch(error => {

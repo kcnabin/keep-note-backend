@@ -19,6 +19,10 @@ mongoose
 
 app.use(express.json())
 app.use(cors())
+app.use((request, response, next) => {
+  console.log(`${request.method} request to ${request.path}`)
+  next()
+})
 app.use('/api/notes', notesRouter)
 
 module.exports = app
