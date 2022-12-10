@@ -2,27 +2,6 @@ const notesRouter = require('express').Router()
 const mongoose = require('mongoose')
 const Note = require('../models/Note')
 
-// let noteObject = [
-//   {
-//     title: "I am building MERN Project from scratch!",
-//     content: "I am building MERN Project from scratch!",
-//     dateCreated: "2022-12-05T01:52:17.996Z",
-//     pinned: true
-//   }, 
-//   {
-//     title: "Express makes server development so much easier",
-//     content: "Express makes server development so much easier",
-//     dateCreated: new Date(),
-//     pinned: false
-//   },
-//   {
-//     title: "Building a project from scratch is best way to solidify learned knowledge",
-//     content: "Building a project from scratch is best way to solidify learned knowledge",
-//     dateCreated: new Date(),
-//     pinned: false
-//   },
-// ]
-
 notesRouter.get('/', (request, response) => {
   Note
     .find({})

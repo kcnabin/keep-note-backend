@@ -1,10 +1,12 @@
 const express = require('express')
 const notesRouter = require('./router/notesRouter')
+const usersRouter = require('./router/usersRouter')
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
+require('dotenv').config()
 
-const mongoUrl = `mongodb+srv://kcnabin:ilovemongodb@cluster0.9wk8l32.mongodb.net/keepNotes?retryWrites=true&w=majority`
+const mongoUrl = process.env.MONGODB_URL
 
 mongoose
   .connect(mongoUrl)
@@ -23,6 +25,8 @@ app.use((request, response, next) => {
   console.log(`${request.method} request to ${request.path}`)
   next()
 })
+
+app.use('/api/users', usersRouter)
 app.use('/api/notes', notesRouter)
 
 module.exports = app
