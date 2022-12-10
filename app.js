@@ -1,6 +1,7 @@
 const express = require('express')
 const notesRouter = require('./router/notesRouter')
 const usersRouter = require('./router/usersRouter')
+const loginRouter = require('./router/loginRouter')
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
@@ -26,6 +27,7 @@ app.use((request, response, next) => {
   next()
 })
 
+app.use('/api/login', loginRouter)
 app.use('/api/users', usersRouter)
 app.use('/api/notes', notesRouter)
 

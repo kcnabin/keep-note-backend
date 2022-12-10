@@ -1,10 +1,18 @@
 const mongoose = require('mongoose')
+const User = require('./User')
 
 const noteSchema = new mongoose.Schema({
-  title: String,
+  title: {
+    type: String,
+    required: true
+  } ,
   content: String,
   dateCreated: Date,
-  pinned: Boolean
+  pinned: Boolean,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  }
 })
 
 noteSchema.set('toJSON', {
