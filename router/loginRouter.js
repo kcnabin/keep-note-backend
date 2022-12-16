@@ -41,7 +41,7 @@ loginRouter.post('/', async (request, response) => {
   // sending back token and username as response
   console.log(`user '${user.username}' logged in`)
   response
-    .send({token, username: user.username})
+    .send({token, username: user.username, id: user._id})
 
 })
 
